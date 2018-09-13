@@ -274,7 +274,7 @@ describe('Sorter', () => {
         sorter.add({ age: 18 });
         sorter.add({ age: 16 });
   
-        sorter.setComparator(AGE_COMPARATOR);
+        sorter.setValueComparator(AGE_COMPARATOR);
         sorter.sort([0, 1]);
   
         assert.deepEqual(sorter.at(0).age, 18);
@@ -283,14 +283,14 @@ describe('Sorter', () => {
       });
 
       it('2', () => {
-        sorter.add({ age: 20 });
-        sorter.add({ age: 18 });
-        sorter.add({ age: 16 });
+        sorter.add({ age: 20 }); // 1
+        sorter.add({ age: 18 }); // 0
+        sorter.add({ age: 16 }); // 2
   
-        sorter.setComparator(AGE_COMPARATOR);
+        sorter.setValueComparator(AGE_COMPARATOR);
         sorter.sort([0, 1]);
 
-        sorter.add({ age: 14 });
+        sorter.add({ age: 14 }); // 3
         sorter.sort([3, 2]);
   
         assert.deepEqual(sorter.at(0).age, 18);
@@ -308,7 +308,7 @@ describe('Sorter', () => {
         sorter.add(10);
         sorter.add(100);
 
-        sorter.setComparator(REVERSE_COMPARATOR);
+        sorter.setValueComparator(REVERSE_COMPARATOR);
         sorter.sort([1, 0]);
     
         assert.deepEqual(sorter.toArray(), [6, 5, 20, 10, 100]);
@@ -324,7 +324,7 @@ describe('Sorter', () => {
         sorter.add(6);
         sorter.add(5);
   
-        sorter.setComparator(REVERSE_COMPARATOR);
+        sorter.setValueComparator(REVERSE_COMPARATOR);
         sorter.sort([1, 0]);
   
         sorter.add(20);
@@ -348,7 +348,7 @@ describe('Sorter', () => {
         sorter.add({ age: 18, smth: 'Anything' });
         sorter.add({ age: 5, course: 'Rolling Scopes' });
   
-        sorter.setComparator(STRINGIFY_COMPARATOR);
+        sorter.setValueComparator(STRINGIFY_COMPARATOR);
         sorter.sort([0, 1]);
   
         assert.deepEqual(sorter.at(0).age, 20);
@@ -364,7 +364,7 @@ describe('Sorter', () => {
         sorter.add({ age: 5, course: 'Rolling Scopes' });
         sorter.add({ age: 18, smth: 'Anything' });
   
-        sorter.setComparator(STRINGIFY_COMPARATOR);
+        sorter.setValueComparator(STRINGIFY_COMPARATOR);
         sorter.sort([2, 1]);
   
         assert.deepEqual(sorter.at(0).age, 20);
@@ -381,7 +381,7 @@ describe('Sorter', () => {
         sorter.add({ age: 18, smth: 'Anything' });
         sorter.add({ age: 7, smth: 'Some' });
   
-        sorter.setComparator(STRINGIFY_COMPARATOR);
+        sorter.setValueComparator(STRINGIFY_COMPARATOR);
         sorter.sort([2, 1]);
         sorter.sort([3, 1]);
   
@@ -397,16 +397,16 @@ describe('Sorter', () => {
         sorter.add({ age: 30, name: 'Dzmitry' });
         sorter.add({ age: 40, name: 'Alex' });
 
-        sorter.setComparator(AGE_COMPARATOR);
+        sorter.setValueComparator(AGE_COMPARATOR);
         sorter.sort([1, 0]);
 
         sorter.add(2);
         sorter.add(10);
 
-        sorter.setComparator(REVERSE_COMPARATOR);
+        sorter.setValueComparator(REVERSE_COMPARATOR);
         sorter.sort([2, 3]);
 
-        sorter.setComparator(STRINGIFY_COMPARATOR)
+        sorter.setValueComparator(STRINGIFY_COMPARATOR)
         sorter.add('hello');
         sorter.add('hello world');
 
