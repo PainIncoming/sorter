@@ -1,8 +1,8 @@
 class Sorter {
   constructor() {
     this._elems = [];
-    this.setValueComparator(
-        (a, b) => a - b
+    this.setComparator(
+      Sorter._defaultComparator
     );
   }
 
@@ -27,19 +27,19 @@ class Sorter {
         return this._elems[item];
     });
 
-    elemsForSort.sort(this._valueComparator);
-    indices.sort(Sorter._indexComparator);
+    elemsForSort.sort(this._comparator);
+    indices.sort(Sorter._defaultComparator);
 
     indices.forEach((item, i) => {
        this._elems[item] = elemsForSort[i];
     });
   }
 
-  setValueComparator(compareFunction) {
-    this._valueComparator = compareFunction;
+  setComparator(compareFunction) {
+    this._comparator = compareFunction;
   }
 
-  static _indexComparator(a, b) {
+  static _defaultComparator(a, b) {
       return a - b;
   }
 }
